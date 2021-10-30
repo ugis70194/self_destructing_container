@@ -1,0 +1,7 @@
+version: '3'
+services:
+  selfdestructing:
+    image: docker
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: /bin/sh -c 'docker ps | grep selfdestructing | awk "{print substr(\$$0, 0, 12)}" | docker rm -f $$(cat)'
